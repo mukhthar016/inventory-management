@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+/* // App.js
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import ItemList from './component/ItemList';
+import AddItem from './component/AddItem';
+
+function App() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem('inventory')) || [];
+    setItems(storedItems);
+  }, []);
+
+  const addItem = (newItem) => {
+    const updatedItems = [...items, newItem];
+    localStorage.setItem('inventory', JSON.stringify(updatedItems));
+    setItems(updatedItems);
+  };
+
+  const deleteItem = (id) => {
+    const updatedItems = items.filter((item) => item.id !== id);
+    localStorage.setItem('inventory', JSON.stringify(updatedItems));
+    setItems(updatedItems);
+  };
+
+  return (
+    <Router>
+      <div className="App">
+        <nav>
+          <ul>
+            <li>
+              <Link to="/" className="nav-link">Inventory</Link>
+            </li>
+            <li>
+              <Link to="/add" className="nav-link">Add Item</Link>
+            </li>
+          </ul>
+        </nav>
+        <Routes>
+          <Route path="/" element={<ItemList items={items} deleteItem={deleteItem} />} />
+          <Route path="/add" element={<AddItem addItem={addItem} />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+}
+
+export default App; */
