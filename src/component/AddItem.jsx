@@ -1,6 +1,6 @@
-// src/component/AddItem.js
+
 import React, { useState } from 'react';
-import './tableStyle.css'; // Import the CSS file into your component
+import './tableStyle.css'; 
 
 
 const AddItem = ({ addItem }) => {

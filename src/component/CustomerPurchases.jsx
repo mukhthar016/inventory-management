@@ -1,6 +1,6 @@
-// CustomerPurchases.jsx
+
 import React, { useState } from 'react';
-import './tableStyle.css'; // Import the CSS file into your component
+import './tableStyle.css'; 
 
 
 const CustomerPurchases = ({ items, handlePurchase }) => {
@@ -10,11 +10,11 @@ const CustomerPurchases = ({ items, handlePurchase }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Calculate total bill
+  
     const selectedProduct = items.find((item) => item.name === selectedItem);
     const totalBill = selectedProduct ? selectedProduct.price * quantity : 0;
 
-    // Create a purchase object
+    
     const purchase = {
       customerName,
       item: selectedItem,
@@ -22,10 +22,10 @@ const CustomerPurchases = ({ items, handlePurchase }) => {
       totalBill,
     };
 
-    // Pass the purchase object to a function in your main App component
+   
     handlePurchase(purchase);
 
-    // Reset form fields
+
     setCustomerName('');
     setSelectedItem('');
     setQuantity('');
@@ -60,7 +60,7 @@ const CustomerPurchases = ({ items, handlePurchase }) => {
           </select>
         </label>
         <label>
-          Quantity:
+          Quantity:(kg)
           <input
             type="number"
             value={quantity}

@@ -1,38 +1,106 @@
-.App {
-  text-align: center;
+/* Global button styles */
+.button {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Green button style */
+.button-green {
+  background-color: green;
   color: white;
+  text-decoration: none;
 }
 
-.App-link {
-  color: #61dafb;
+.button-green:hover {
+  background-color: darkgreen;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Red button style */
+.button-red {
+  background-color: red;
+  color: white;
+  text-decoration: none;
 }
+
+.button-red:hover {
+  background-color: darkred;
+}
+
+/* Navigation link styles */
+.nav-link {
+  text-decoration: none;
+  margin-right: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  color: #4CAF50;
+}
+
+/* Style for the tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+th, td {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Style for forms and labels */
+form {
+  margin: 20px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+}
+
+/* Style for the purchase history table */
+h2 {
+  margin-top: 20px;
+}
+
+#purchase-history-table {
+  border-collapse: collapse;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#purchase-history-table th, #purchase-history-table td {
+  border: 1px solid #e0e0e0;
+  padding: 12px;
+  text-align: left;
+}
+
+#purchase-history-table th {
+  background-color: #f2f2f2;
+}
+

@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ItemList from './component/ItemList';
 import AddItem from './component/AddItem';
 import CustomerPurchases from './component/CustomerPurchases';
-import DeleteItem from './component/DeleteItem';
-import Login from './component/Login';
-import './App.css'
+import Navigation from './component/Navigation'; // Import the Navigation component
 
 function App() {
-  const [userAuthenticated, setUserAuthenticated] = useState(false);
   const [items, setItems] = useState([]);
   const [purchases, setPurchases] = useState([]);
-  const [showDeleteItem, setShowDeleteItem] = useState(false);
 
   useEffect(() => {
     const storedItems = JSON.parse(localStorage.getItem('inventory')) || [];
     setItems(storedItems);
+
+    const storedPurchaseHistory = JSON.parse(localStorage.getItem('purchaseHistory')) || [];
+    setPurchases(storedPurchaseHistory);
   }, []);
 
   const addItem = (newItem) => {
@@ -36,10 +35,15 @@ function App() {
     }
   };
 
-  const deleteItem = (id) => {
-    const updatedItems = items.filter((item) => item.id !== id);
-    localStorage.setItem('inventory', JSON.stringify(updatedItems));
+  const deleteItem = (itemId) => {
+    // Implement the logic to delete an item based on the itemId
+    // This can involve updating the 'items' state and also removing it from local storage.
+    // Make sure to handle any necessary validation and error checking here.
+
+    // Example logic (you need to adapt this to your specific use case):
+    const updatedItems = items.filter((item) => item.id !== itemId);
     setItems(updatedItems);
+    localStorage.setItem('inventory', JSON.stringify(updatedItems));
   };
 
   const handlePurchase = (purchase) => {
@@ -52,111 +56,51 @@ function App() {
         selectedItem.quantity = newQuantity;
         localStorage.setItem('inventory', JSON.stringify(updatedItems));
         setItems(updatedItems);
+
+        // Update the purchases
         setPurchases((prevPurchases) => [...prevPurchases, purchase]);
+        localStorage.setItem('purchaseHistory', JSON.stringify([...purchases, purchase]));
       } else {
         alert(`Not enough ${purchase.item} in stock.`);
       }
     }
   };
 
-  const toggleDeleteItem = () => {
-    setShowDeleteItem(!showDeleteItem);
-  };
-
-  const handleUserLogin = () => {
-    // Perform any necessary logic to verify user credentials or set user authentication status.
-    setUserAuthenticated(true); // For simplicity, we're assuming the user is authenticated upon successful login.
-  };
-
-  const handleLogout = () => {
-    // Perform any necessary logout logic.
-    setUserAuthenticated(false);
-  };
-
   return (
     <Router>
       <div className="App">
-        <nav>
-<ul>
-
-
-  <li>
-    <Link to="/" className="nav-button">Inventory</Link>
-  </li>
-
-
-
-  <li>
-    <Link to="/add" className="nav-button">Add Item</Link>
-  </li>
-
-
-
-  <li>
-    <Link to="/purchases" className="nav-button">Customer Purchases</Link>
-  </li>
-
-
-
-  <li>
-    {userAuthenticated ? (
-      <button onClick={handleLogout} className="logout-button">Logout</button>
-    ) : (
-      <Link to="/login" className="login-button">Login</Link>
-    )}
-  </li>
-
-  
-</ul>
-
-        </nav>
+        <Navigation /> {/* Show navigation */}
         <Routes>
-          {userAuthenticated ? (
-            <>
-              <Route path="/" element={<ItemList items={items} deleteItem={deleteItem} />} />
-              <Route path="/add" element={<AddItem addItem={addItem} />} />
-              <Route path="/purchases" element={<CustomerPurchases items={items} handlePurchase={handlePurchase} />} />
-              {showDeleteItem && <DeleteItem onDeleteItem={deleteItem} />}
-              <div>
-                <h2>Customer Purchase History</h2>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Customer Name</th>
-                      <th>Item</th>
-                      <th>Quantity</th>
-                      <th>Total Bill</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {purchases.map((purchase, index) => (
-                      <tr key={index}>
-                        <td>{purchase.customerName}</td>
-                        <td>{purchase.item}</td>
-                        <td>{purchase.quantity}</td>
-                        <td>₹{purchase.totalBill.toFixed(2)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </>
-          ) : (
-            <Route
-              path="/login"
-              element={userAuthenticated ? <Navigate to="/" /> : <Login onLogin={handleUserLogin} />}
-            />
-          )}
+          <Route path="/" element={<ItemList items={items} deleteItem={deleteItem} />} />
+          <Route path="/add" element={<AddItem addItem={addItem} />} />
+          <Route path="/purchases" element={<CustomerPurchases items={items} handlePurchase={handlePurchase} />} />
         </Routes>
+        <div>
+          <h2>Customer Purchase History</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Item</th>
+                <th>Quantity(kg)</th>
+                <th>Total Bill</th>
+              </tr>
+            </thead>
+            <tbody>
+              {purchases.map((purchase, index) => (
+                <tr key={index}>
+                  <td>{purchase.customerName}</td>
+                  <td>{purchase.item}</td>
+                  <td>{purchase.quantity}</td>
+                  <td>₹{purchase.totalBill.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Router>
   );
 }
 
 export default App;
-
-
-
-
-
-
